@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger,style,transition,animate,keyframes,query,stagger } from '@angular/animations';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-home',
@@ -36,18 +37,21 @@ export class HomeComponent implements OnInit {
   //Declare goals as an array to hold all the goals added by the user
   goals = [];
 
-  constructor() { }
+  constructor(private _data: DataService) { }
 
   //The following funtion runs when the component is loaded
   //Use it to initialize variables
   ngOnInit() {
     this.itemCount = this.goals.length;
+    this._data.goal.subscribe(res => this.goals = res);
+    this._data.changeGoal(this.goals);
   }
 
   addItem() {
     this.goals.push(this.goalText);
     this.goalText = '';
     this.itemCount = this.goals.length;
+    this._data.changeGoal(this.goals);
   }
 
   removeItem(i) {
@@ -56,6 +60,8 @@ export class HomeComponent implements OnInit {
     //the second is how many items will be affected
     //the third are the items to be added. If nothing is provided the item on the position i is removed. 
     this.goals.splice(i , 1);
+    this.itemCount = this.goals.length;
+    this._data.changeGoal(this.goals);
   }
 
 }

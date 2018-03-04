@@ -10,7 +10,8 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'about',
+    //Add route parameter :id
+    path: 'about/:id',
     component: AboutComponent
   }
 ];

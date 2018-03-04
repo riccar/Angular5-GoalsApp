@@ -1,3 +1,14 @@
 <p>
-  about works!
+  About received the following route param = {{idParam}}
 </p>
+<p>
+  <!--Remove href="" to preserve state-->
+  <a (click)="sendMeHome()"><strong>Take me back</strong></a><br>
+  <a routerLink=""><strong>Take me back home preserving state</strong></a>
+</p>
+<ul>
+  <li *ngFor="let goal of goals">
+    {{ goal }}
+  </li>
+</ul>
+
